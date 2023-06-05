@@ -30,10 +30,11 @@ const getAllMessages = async (req, res) => {
   try {
     const messages = await Message.find();
     // Decrypt the message content using the Caesar cipher
-    const decryptedMessages = messages.map((message) => {
-      const decryptedContent = caesarCipher(message.content, -3); // Example: Shift back by 3
-      return { ...message._doc, content: decryptedContent };
-    });
+    //<-----Uncomment the below code----->
+    // const decryptedMessages = messages.map((message) => {
+    //   const decryptedContent = caesarCipher(message.content, -3); // Example: Shift back by 3
+    //   return { ...message._doc, content: decryptedContent };
+    // });
     console.log(decryptedMessages);
 
     res.status(200).json({ messages: decryptedMessages });
@@ -48,7 +49,8 @@ const newmessages = async (req, res) => {
   try {
     const { senderId, receiverId, content } = req.body;
     // Encrypt the message content using the Caesar cipher
-    const encryptedContent = caesarCipher(content, 3); // Example: Shift by 3
+    //<--------Uncomment the below code----------->
+    // const encryptedContent = caesarCipher(content, 3); // Example: Shift by 3
     console.log(encryptedContent);
 
     const sender = await User.findById(senderId);
